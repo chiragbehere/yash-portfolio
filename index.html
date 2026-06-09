@@ -35,10 +35,147 @@
         padding-top: 85px !important;
       }
     }
+    
+    /* Floating Theme Toggle Button */
+    .theme-toggle-btn {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      background: var(--onyx);
+      color: var(--orange-yellow-crayola);
+      border: 1px solid var(--jet);
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: var(--shadow-2);
+      z-index: 100;
+      transition: var(--transition-1);
+    }
+    
+    .theme-toggle-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(255, 219, 112, 0.4);
+    }
+    
+    @media (max-width: 768px) {
+      .theme-toggle-btn {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+    }
+    
+    /* Light Theme Styling Variables & Overrides */
+    body.light-theme {
+      --smoky-black: hsl(0, 0%, 96%);
+      --eerie-black-2: hsl(0, 0%, 100%);
+      --eerie-black-1: hsl(0, 0%, 98%);
+      --jet: hsl(0, 0%, 88%);
+      --onyx: hsl(0, 0%, 90%);
+      --white-1: hsl(0, 0%, 20%);
+      --white-2: hsl(0, 0%, 10%);
+      --light-gray: hsl(0, 0%, 30%);
+      --light-gray-70: hsla(0, 0%, 30%, 0.75);
+      --vegas-gold: hsl(35, 60%, 40%);
+      --orange-yellow-crayola: hsl(35, 100%, 45%);
+      
+      --shadow-1: -4px 8px 24px rgba(0, 0, 0, 0.08);
+      --shadow-2: 0 16px 30px rgba(0, 0, 0, 0.06);
+      --shadow-3: 0 16px 40px rgba(0, 0, 0, 0.08);
+      --shadow-4: 0 25px 50px rgba(0, 0, 0, 0.04);
+      --shadow-5: 0 24px 80px rgba(0, 0, 0, 0.08);
+      
+      --bg-gradient-onyx: linear-gradient(
+        to bottom right, 
+        hsl(0, 0%, 98%) 3%, 
+        hsl(0, 0%, 93%) 97%
+      );
+      --bg-gradient-jet: linear-gradient(
+        to bottom right, 
+        hsla(0, 0%, 95%, 0.25) 0%, 
+        hsla(0, 0%, 92%, 0) 100%
+      ), hsl(0, 0%, 95%);
+      --border-gradient-onyx: linear-gradient(
+        to bottom right, 
+        hsl(0, 0%, 90%) 0%, 
+        hsla(0, 0%, 90%, 0) 50%
+      );
+      --bg-gradient-yellow-2: linear-gradient(
+        135deg, 
+        hsla(35, 100%, 45%, 0.25) 0%, 
+        hsla(35, 100%, 45%, 0) 59.86%
+      ), hsl(0, 0%, 98%);
+    }
+    
+    body.light-theme .theme-toggle-btn {
+      background: var(--eerie-black-2);
+      color: var(--orange-yellow-crayola);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    body.light-theme .theme-toggle-btn:hover {
+      box-shadow: 0 0 12px rgba(212, 163, 115, 0.4);
+    }
+    
+    body.light-theme .navbar {
+      background: hsla(0, 0%, 100%, 0.85);
+      border-color: var(--jet);
+    }
+    
+    body.light-theme .navbar-link {
+      color: var(--light-gray);
+    }
+    
+    body.light-theme .navbar-link:hover,
+    body.light-theme .navbar-link:focus {
+      color: var(--white-2);
+    }
+    
+    body.light-theme .navbar-link.active {
+      color: var(--orange-yellow-crayola);
+    }
+    
+    body.light-theme .mapbox iframe {
+      filter: grayscale(0.5);
+    }
+    
+    body.light-theme .form-btn {
+      background: var(--white-2);
+      color: var(--orange-yellow-crayola);
+    }
+    
+    body.light-theme .form-btn::before {
+      background: var(--white-2);
+    }
+    
+    body.light-theme .form-btn:hover {
+      background: var(--vegas-gold);
+      color: var(--eerie-black-2);
+    }
+    
+    body.light-theme .form-btn:hover::before {
+      background: var(--vegas-gold);
+    }
+    
+    body.light-theme .form-input:focus {
+      border-color: var(--orange-yellow-crayola);
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- Floating Theme Toggle Button -->
+  <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Theme">
+    <ion-icon name="moon-outline" id="theme-icon"></ion-icon>
+  </button>
 
   <!--
     - #MAIN
@@ -115,7 +252,7 @@
             <div class="contact-info">
               <p class="contact-title">Birthday</p>
 
-              <time datetime="2005-01-01">2005</time>
+              <time datetime="2006-01-01">2006</time>
             </div>
 
           </li>
@@ -435,8 +572,20 @@
 
               <p class="timeline-text">
                 Leading robotics team "Rudra Ved" participating in Robo Race, Robo Soccer, and Robo Sumo competitions at
-                multiple national and state-level techfests. Secured 1st place at Infinity 2026 (K.K. Wagh), 1st place at
+                multiple national and state-level techfests. Secured 1st place at Infinity 2026, 1st place at
                 Project XPO 2K26, and 2nd place at MET Enthusia 2026.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Founder — Avdhoot Digital</h4>
+
+              <span>2024 — Present</span>
+
+              <p class="timeline-text">
+                Founded Avdhoot Digital, a digital marketing agency dedicated to helping businesses strengthen their online presence. We provide social media management, content creation, branding, and digital marketing solutions that help brands increase visibility, engagement, and customer growth.
               </p>
 
             </li>
@@ -1454,7 +1603,7 @@
             </div>
           </div>
 
-          <form action="mailto:yashppatil1206@gmail.com" method="POST" enctype="text/plain" class="form" data-form>
+          <form action="#" class="form" data-form>
 
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
@@ -1502,6 +1651,44 @@
     - custom js link
   -->
   <script src="./assets/js/script.js"></script>
+
+  <!-- Theme Toggle & Direct Gmail Form Handler -->
+  <script>
+    // Theme Toggle Functionality
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-theme');
+      themeIcon.setAttribute('name', 'sunny-outline');
+    }
+    
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      const isLight = document.body.classList.contains('light-theme');
+      themeIcon.setAttribute('name', isLight ? 'sunny-outline' : 'moon-outline');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    // Form Submission Interception to Open Gmail Directly (Prevents Browser Warnings & Outlook)
+    const contactForm = document.querySelector('[data-form]');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const fullname = this.querySelector('[name="fullname"]').value;
+        const email = this.querySelector('[name="email"]').value;
+        const message = this.querySelector('[name="message"]').value;
+        
+        const subject = "Portfolio Message from " + fullname;
+        const bodyText = `Name: ${fullname}\nEmail: ${email}\n\nMessage:\n${message}`;
+        
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=yashppatil1206@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+        
+        window.open(gmailUrl, '_blank');
+      });
+    }
+  </script>
 
   <!--
     - ionicon link
