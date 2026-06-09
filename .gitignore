@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.pdf
+*.txt
+extract_pdfs.py
+website-demo-image/
