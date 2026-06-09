@@ -36,11 +36,17 @@
       }
     }
     
-    /* Floating Theme Toggle Button */
-    .theme-toggle-btn {
+    /* Floating Header Action Container */
+    .top-actions-container {
       position: fixed;
       top: 25px;
-      right: 25px;
+      left: 25px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+    
+    .action-btn {
       background: var(--onyx);
       color: var(--orange-yellow-crayola);
       border: 1px solid var(--jet);
@@ -53,23 +59,88 @@
       font-size: 20px;
       cursor: pointer;
       box-shadow: var(--shadow-2);
-      z-index: 100;
       transition: var(--transition-1);
     }
     
-    .theme-toggle-btn:hover {
+    .action-btn:hover {
       transform: scale(1.1);
       box-shadow: 0 0 12px rgba(255, 219, 112, 0.4);
     }
     
-    @media (max-width: 768px) {
-      .theme-toggle-btn {
+    #menu-toggle {
+      display: none;
+    }
+    
+    /* Responsive Styles for Mobile/Tablet (< 1024px) */
+    @media (max-width: 1023px) {
+      .top-actions-container {
         top: 15px;
-        right: 15px;
+        left: 15px;
+      }
+      
+      .action-btn {
         width: 40px;
         height: 40px;
         font-size: 18px;
       }
+      
+      #menu-toggle {
+        display: flex;
+      }
+      
+      main {
+        margin-bottom: 30px !important;
+      }
+      
+      /* Navbar as a Dropdown on Mobile */
+      .navbar {
+        position: fixed;
+        top: 70px;
+        bottom: auto !important;
+        left: 15px;
+        right: auto;
+        width: 220px;
+        background: var(--eerie-black-2);
+        border: 1px solid var(--jet);
+        border-radius: 14px;
+        box-shadow: var(--shadow-3);
+        padding: 8px;
+        display: none;
+        z-index: 99;
+      }
+      
+      .navbar.active {
+        display: block;
+        animation: slideDown 0.3s ease forwards;
+      }
+      
+      .navbar-list {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+        gap: 0;
+      }
+      
+      .navbar-item {
+        width: 100%;
+      }
+      
+      .navbar-link {
+        width: 100%;
+        padding: 10px 15px;
+        font-size: var(--fs-6);
+        border-radius: 8px;
+        text-align: left;
+      }
+      
+      .navbar-link.active {
+        background: var(--onyx);
+      }
+    }
+    
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
     
     /* Light Theme Styling Variables & Overrides */
@@ -114,13 +185,13 @@
       ), hsl(0, 0%, 98%);
     }
     
-    body.light-theme .theme-toggle-btn {
+    body.light-theme .action-btn {
       background: var(--eerie-black-2);
       color: var(--orange-yellow-crayola);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
     
-    body.light-theme .theme-toggle-btn:hover {
+    body.light-theme .action-btn:hover {
       box-shadow: 0 0 12px rgba(212, 163, 115, 0.4);
     }
     
@@ -172,10 +243,15 @@
 
 <body>
 
-  <!-- Floating Theme Toggle Button -->
-  <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Theme">
-    <ion-icon name="moon-outline" id="theme-icon"></ion-icon>
-  </button>
+  <!-- Floating Action Buttons (Theme Toggle & Mobile Menu Toggle) -->
+  <div class="top-actions-container">
+    <button id="theme-toggle" class="action-btn" title="Toggle Theme">
+      <ion-icon name="moon-outline" id="theme-icon"></ion-icon>
+    </button>
+    <button id="menu-toggle" class="action-btn" title="Toggle Menu">
+      <ion-icon name="menu-outline" id="menu-icon"></ion-icon>
+    </button>
+  </div>
 
   <!--
     - #MAIN
@@ -1652,7 +1728,7 @@
   -->
   <script src="./assets/js/script.js"></script>
 
-  <!-- Theme Toggle & Direct Gmail Form Handler -->
+  <!-- Theme Toggle, Mobile Menu Toggle, & Direct Gmail Form Handler -->
   <script>
     // Theme Toggle Functionality
     const themeToggleBtn = document.getElementById('theme-toggle');
@@ -1669,6 +1745,38 @@
       themeIcon.setAttribute('name', isLight ? 'sunny-outline' : 'moon-outline');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
+
+    // Mobile Navbar Menu Dropdown Toggle
+    const menuToggleBtn = document.getElementById('menu-toggle');
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    
+    if (menuToggleBtn && navbar) {
+      menuToggleBtn.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+        const isOpen = navbar.classList.contains('active');
+        menuIcon.setAttribute('name', isOpen ? 'close-outline' : 'menu-outline');
+      });
+      
+      // Close navbar dropdown when any nav link is clicked
+      const navLinks = navbar.querySelectorAll('[data-nav-link]');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth < 1024) {
+            navbar.classList.remove('active');
+            menuIcon.setAttribute('name', 'menu-outline');
+          }
+        });
+      });
+      
+      // Close navbar dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navbar.contains(e.target) && !menuToggleBtn.contains(e.target)) {
+          navbar.classList.remove('active');
+          menuIcon.setAttribute('name', 'menu-outline');
+        }
+      });
+    }
 
     // Form Submission Interception to Open Gmail Directly (Prevents Browser Warnings & Outlook)
     const contactForm = document.querySelector('[data-form]');
