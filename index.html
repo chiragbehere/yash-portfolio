@@ -1444,12 +1444,17 @@
 
           <h3 class="h3 form-title">Contact Form</h3>
 
-          <form action="https://formsubmit.co/yashppatil1206@gmail.com" method="POST" class="form" data-form>
+          <div class="service-item" style="display: flex; align-items: center; gap: 15px; padding: 20px; background: var(--border-gradient-onyx); border-radius: 14px; margin-bottom: 30px;">
+            <div class="icon-box" style="width: 48px; height: 48px; border-radius: 12px; font-size: 20px; display: flex; align-items: center; justify-content: center; color: var(--orange-yellow-crayola);">
+              <ion-icon name="mail-outline" style="--ionicon-stroke-width: 40px;"></ion-icon>
+            </div>
+            <div>
+              <p style="color: var(--light-gray-70); font-size: var(--fs-8); text-transform: uppercase; margin-bottom: 2px;">Email Directly</p>
+              <a href="mailto:yashppatil1206@gmail.com" style="color: var(--white-2); font-size: var(--fs-6); font-weight: var(--fw-500); transition: color var(--transition-1);" onmouseover="this.style.color='var(--orange-yellow-crayola)'" onmouseout="this.style.color='var(--white-2)'">yashppatil1206@gmail.com</a>
+            </div>
+          </div>
 
-            <!-- Custom FormSubmit configurations -->
-            <input type="hidden" name="_subject" value="New Contact Form Submission from Yash Patil Portfolio">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
+          <form action="mailto:yashppatil1206@gmail.com" method="POST" enctype="text/plain" class="form" data-form>
 
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
